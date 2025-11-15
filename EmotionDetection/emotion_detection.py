@@ -6,6 +6,18 @@ def emotion_detector(text_to_analyse):
     headers = {
         "grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"
     }
+
+    # Handle blank input
+    if not text_to_analyse.strip():
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None
+        }
+
     payload = {
         "raw_document": {
             "text": text_to_analyse
@@ -13,7 +25,18 @@ def emotion_detector(text_to_analyse):
     }
 
     response = requests.post(url, json=payload, headers=headers)
-    
+
+    # If the server returns a bad request (e.g., blank input), return None values
+    if response.status_code == 400:
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None
+        }
+
     # Convert response text into dictionary
     response_dict = json.loads(response.text)
 
