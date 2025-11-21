@@ -164,9 +164,3 @@ This project is open-source and free to use under the MIT License.
 
 ```
 
----
-
-If you want, I can also create a **shorter, visually appealing version** with badges and quick links for your GitHub repository so it looks more professional.  
-
-Do you want me to do that?
-```
